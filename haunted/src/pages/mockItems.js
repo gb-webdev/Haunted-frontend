@@ -1,3 +1,5 @@
+import mockUsers from "./mockUsers"
+
 let mockItems = [
     {
         id: 1,
@@ -20,3 +22,5 @@ let mockItems = [
         image: "https://www.google.com/url?sa=i&url=http%3A%2F%2Fceat.com.tn%2Fkjyo.aspx%3Fcname%3Dcable%2Band%2Bsons%2Bbaby%2Bgrand%2Bpiano%26cid%3D95&psig=AOvVaw1oHFZjiB-zzgrnaJF5H0CH&ust=1713150551425000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMDdkKTdwIUDFQAAAAAdAAAAABAV"
     }
 ]
+
+export default mockItems
