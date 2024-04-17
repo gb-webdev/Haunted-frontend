@@ -1,11 +1,14 @@
 import React from 'react'
 import logo from '../assets/haunted-logo.png'
+import { NavLink, NavItem } from "react-router-dom";
 import './Header.css'
 
 const Header = () => {
     return (
         <div className='header-container'>
-            <img className='logo' src={logo} />
+            <NavLink>
+                <img className='logo' src={logo} />
+            </NavLink>
         </div>
     )
 }
