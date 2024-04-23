@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import './SignUp.css'
 
 const SignUp = ({ SignUp }) => {
@@ -32,7 +32,7 @@ const SignUp = ({ SignUp }) => {
                 <input type='text' name='password_confirmation' placeholder='confirm password'/>
                 <input type='submit' value='Submit' className='submit-button'/>
                 <span>Already Have an Account?
-                <a href='/login'className='login'>Log In!</a></span>
+                <Link to='/login'className='login'>Log In!</Link></span>
             </form>
         </div>
     )

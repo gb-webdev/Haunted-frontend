@@ -5,7 +5,7 @@ import mockItems from './pages/mockItems.js'
 import Header from './components/Header.js'
 import SignUp from './pages/SignUp.js'
 import SignIn from './pages/SignIn.js'
-import Items from './pages/Items.js'
+import ItemIndex from './pages/ItemIndex.js'
 import ItemNew from './pages/ItemNew.js'
 import ProtectedIndex from './pages/ProtectedIndex.js'
 import './App.css'
@@ -33,7 +33,7 @@ const App = () => {
       <div className="App-container">
         <Routes>
           <Route path='/' element={<Header />} />
-          <Route path='/items' element={<Items />} />
+          <Route path='/items' element={<ItemIndex items={items} />} />
           <Route path='/itemnew' element={<ItemNew createItem={createItem} currentUser={currentUser} />} />
           {currentUser && (
             <Route path="/myitems" element={<ProtectedIndex items={items} currentUser={currentUser} />} />

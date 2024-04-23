@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import './SignIn.css'
 
 const SignIn = ({ login }) => {
@@ -27,7 +27,7 @@ const SignIn = ({ login }) => {
                 <input type='email' name='email' placeholder='Enter Email...' />
                 <input type='text' name='password' placeholder='Enter Password' />
                 <input className='submit-button' type='submit' value='Submit' />
-                <h5>New to Haunted?<a className='signup-link' href='/sugnup'>Sign Up Here!</a></h5>
+                <h5>New to Haunted?<Link className='signup-link' to='/sugnup'>Sign Up Here!</Link></h5>
             </form>
         </div>
     )
