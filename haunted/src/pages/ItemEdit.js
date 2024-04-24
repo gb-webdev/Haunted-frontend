@@ -33,7 +33,13 @@ const itemEdit = ({ updateItem, currentUser, items }) => {
             <h2>Edit Item</h2>
             <form>
                 <h5></h5>
-                <input></input>
+                <input type='text' name='title' value={editItem.title} onChange={handleChange} />
+                <input type='number' name='price' value={editItem.price} onChange={handleChange} />
+                <input type='text' name='contact' value={editItem.contact} onChange={handleChange} />
+                <input type='text' name='location' value={editItem.location} onChange={handleChange} />
+                <input type='text' name='condition' value={editItem.condition} onChange={handleChange} />
+                <input type='text' name='descriiption' value={editItem.description} onChange={handleChange} />
+                <input type='text' name='image' value={editItem.image} onChange={handleChange} />
             </form>
         </div>
     )

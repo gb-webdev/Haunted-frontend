@@ -1,7 +1,10 @@
 import React from 'react'
 import { useParams, NavLink } from 'react-router-dom'
 
-const ProtectedIndex = ({ items, currentUser}) => {
+const ProtectedIndex = ({ items, currentUser, deleteItem }) => {
+    let { id } = useParams()
+
+    const selectedItem = items?.find((item) => item.id === +id)
 
     const myItems = items.filter(item => currentUser?.id === item.user_id)
 
@@ -16,8 +19,8 @@ const ProtectedIndex = ({ items, currentUser}) => {
                             <img />
                             <NavLink to={`/myitems/${item.id}/edit`}>
                             <button>Edit</button>
+                            <button onClick={() => deleteItem(selectedItem?.id)}>Delete</button>
                             </NavLink>
-                            <button>Delete</button>
                         </div>
                     )
                 })}

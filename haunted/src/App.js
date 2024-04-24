@@ -28,6 +28,23 @@ const App = () => {
     console.log('createItem invoked')
   }
 
+  const url = 'http://localhost:3000'
+  const readItem = () => {
+
+  }
+    
+    const deleteItem = (id) => {
+      fetch(`${url}/items/${id}`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'DELETE'
+      })
+      .then((response) => response.json())
+      .then(() => readItem())
+      .catch((errors) => console.log('delete errors', errors))
+    }
+
   return (
     <>
       <div className="App-container">
@@ -36,7 +53,7 @@ const App = () => {
           <Route path='/items' element={<ItemIndex items={items} />} />
           <Route path='/itemnew' element={<ItemNew createItem={createItem} currentUser={currentUser} />} />
           {currentUser && (
-            <Route path="/myitems" element={<ProtectedIndex items={items} currentUser={currentUser} />} />
+            <Route path="/myitems" element={<ProtectedIndex deleteItem={deleteItem} items={items} currentUser={currentUser} />} />
           )}
           {!currentUser && (
             <>
