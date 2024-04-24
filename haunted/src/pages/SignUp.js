@@ -27,9 +27,9 @@ const SignUp = ({ SignUp }) => {
                 <h5>Email</h5>
                 <input type='email' name='email'placeholder='email'/>
                 <h5>Password</h5>
-                <input type='text' name='password' placeholder='create password'/>
+                <input type='password' name='password' placeholder='create password'/>
                 <h5>Confirm Password</h5>
-                <input type='text' name='password_confirmation' placeholder='confirm password'/>
+                <input type='password' name='password_confirmation' placeholder='confirm password'/>
                 <input type='submit' value='Submit' className='submit-button'/>
                 <span>Already Have an Account?
                 <Link to='/login'className='login'>Log In!</Link></span>

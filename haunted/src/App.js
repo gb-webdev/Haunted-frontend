@@ -16,8 +16,25 @@ const App = () => {
   const [items, setItems] = useState([])
 
   const login = (userInfo) => {
-    console.log('login invoked')
-    setCurrentUser(mockUsers[0])
+    fetch(`${url}/login`, {
+      body: JSON.stringify(userInfo),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      method: 'POST',
+    })
+    .then(response => {
+      if(!response.ok) {
+        throw Error(response.statusText)
+      }
+      localStorage.setItem('token', response.headers.get('Authorization'))
+    })
+    .then(payload => {
+      localStorage.setItem('user', JSON.stringify(payload))
+      setCurrentUser(payload)
+    })
+    .catch(error => console.log('login errors: ', error))
   }
 
   const signup = (userInfo) => {
@@ -43,7 +60,19 @@ const App = () => {
   }
 
   const logout = () => {
-    setCurrentUser(null)
+    fetch(`${url}/logout`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': localStorage.getItem('token'),
+      },
+      method: 'DELETE',
+    })
+    .then(payload => {
+      setCurrentUser(null)
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+    })
+    .catch(error => console.log('logout errors: ', error))
   }
 
   useEffect(() => {
@@ -87,12 +116,12 @@ const App = () => {
           {currentUser && (
             <Route path="/myitems" element={<ProtectedIndex deleteItem={deleteItem} items={items} currentUser={currentUser} />} />
           )}
-          {!currentUser && (
+
             <>
             <Route path='/login' element={<SignIn login={login} />} />
             <Route path='/signup' element={<SignUp signup={signup} />} />
             </>
-          )}
+
         </Routes>
       </div>
     </>

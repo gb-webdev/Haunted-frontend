@@ -25,7 +25,7 @@ const SignIn = ({ login }) => {
             <h2>Log In</h2>
             <form className='login-form' ref={formRef} onSubmit={handleSubmit}>
                 <input type='email' name='email' placeholder='Enter Email...' />
-                <input type='text' name='password' placeholder='Enter Password' />
+                <input type='password' name='password' placeholder='Enter Password' />
                 <input className='submit-button' type='submit' value='Submit' />
                 <h5>New to Haunted?<Link className='signup-link' to='/sugnup'>Sign Up Here!</Link></h5>
             </form>
