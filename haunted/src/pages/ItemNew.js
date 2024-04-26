@@ -25,6 +25,10 @@ const ItemNew = ({ createItem, currentUser }) => {
         navigate('/myitems')
     }
 
+    const handleClick = () => {
+        navigate('/mydecks')
+    }
+
     return (
         <div className='item-new-container'>
             <form>
@@ -37,6 +41,7 @@ const ItemNew = ({ createItem, currentUser }) => {
                 <textarea id='description' name='description' placeholder='Item Description...' type='text' cols='30' rows='10' onChange={handleChange} value={ItemNew.description}></textarea>
                 <input id='image' name='image' placeholder='Image Link...' type='text' onChange={handleChange} value={ItemNew.image}></input>
                 <button className='new-item-button' onClick={handleSubmit} name='submit'>Post Item</button>
+                <button className='cancel-new-button' onclick={handleClick}>Cancel</button>
             </form>
         </div>
     )
