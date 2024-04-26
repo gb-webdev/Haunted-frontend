@@ -19,7 +19,7 @@ const ProtectedIndex = ({ items, currentUser, deleteItem }) => {
                             <img />
                             <NavLink to={`/myitems/${item.id}/edit`}>
                             <button>Edit</button>
-                            <button onClick={() => deleteItem(selectedItem?.id)}>Delete</button>
+                            <button onClick={() => deleteItem(item.id)}>Delete</button>
                             </NavLink>
                         </div>
                     )

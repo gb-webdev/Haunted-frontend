@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import {Route, Routes} from 'react-router-dom'
-import mockUsers from './pages/mockUsers.js'
-import mockItems from './pages/mockItems.js'
 import Header from './components/Header.js'
 import SignUp from './pages/SignUp.js'
 import SignIn from './pages/SignIn.js'
 import ItemIndex from './pages/ItemIndex.js'
 import ItemNew from './pages/ItemNew.js'
 import ProtectedIndex from './pages/ProtectedIndex.js'
+import ErrorPage from './pages/ErrorPage.js'
 import './App.css'
 
 const App = () => {
@@ -79,8 +78,17 @@ const App = () => {
     readItem()
   }, [])
 
-  const createItem = () => {
-    console.log('createItem invoked')
+  const createItem = (newItem) => {
+    fetch(`${url}/items`,{
+      body: JSON.stringify(newItem),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
+    })
+    .then(response => response.json())
+    .then(() => readItem())
+    .catch(errors => console.log('createItem errors: ', errors))
   }
 
   const url = 'http://localhost:3000'
@@ -114,14 +122,15 @@ const App = () => {
           <Route path='/items' element={<ItemIndex items={items} />} />
           <Route path='/itemnew' element={<ItemNew createItem={createItem} currentUser={currentUser} />} />
           {currentUser && (
-            <Route path="/myitems" element={<ProtectedIndex deleteItem={deleteItem} items={items} currentUser={currentUser} />} />
+            <Route path="/myitems" element={<ProtectedIndex deleteItem={deleteItem} items={items} readItem={readItem} currentUser={currentUser} />} />
           )}
-
+          {!currentUser && (
             <>
             <Route path='/login' element={<SignIn login={login} />} />
             <Route path='/signup' element={<SignUp signup={signup} />} />
             </>
-
+          )}
+          <Route path='*' elemt={ErrorPage} />
         </Routes>
       </div>
     </>
