@@ -14,6 +14,16 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState([])
   const [items, setItems] = useState([])
 
+  const url = 'http://localhost:3000'
+
+  useEffect(() => {
+    readItem()
+    const storedUser = localStorage.getItem('user')
+    if (storedUser) {
+      setCurrentUser(JSON.parse(storedUser))
+    }
+  }, [])
+
   const login = (userInfo) => {
     fetch(`${url}/login`, {
       body: JSON.stringify(userInfo),
@@ -28,6 +38,7 @@ const App = () => {
         throw Error(response.statusText)
       }
       localStorage.setItem('token', response.headers.get('Authorization'))
+      return response.json()
     })
     .then(payload => {
       localStorage.setItem('user', JSON.stringify(payload))
@@ -37,7 +48,7 @@ const App = () => {
   }
 
   const signup = (userInfo) => {
-    fetch('http://localhost:3000/signup', {
+    fetch(`${url}/signup`, {
       body: JSON.stringify(userInfo),
       headers: {
         'Content-Type': 'application/json',
@@ -62,9 +73,9 @@ const App = () => {
     fetch(`${url}/logout`, {
       headers: {
         'Content-Type': 'application/json',
-        'Accept': localStorage.getItem('token'),
+        'Accept': 'application/json',
       },
-      method: 'DELETE',
+      method: 'GET',
     })
     .then(payload => {
       setCurrentUser(null)
@@ -74,12 +85,8 @@ const App = () => {
     .catch(error => console.log('logout errors: ', error))
   }
 
-  useEffect(() => {
-    readItem()
-  }, [])
-
   const createItem = (newItem) => {
-    fetch(`${url}/items`,{
+    fetch(`${url}/items`, {
       body: JSON.stringify(newItem),
       headers: {
         'Content-Type': 'application/json'
@@ -90,8 +97,6 @@ const App = () => {
     .then(() => readItem())
     .catch(errors => console.log('createItem errors: ', errors))
   }
-
-  const url = 'http://localhost:3000'
 
   const readItem = () => {
     fetch(`${url}/items`)
