@@ -9,6 +9,15 @@ const Header = ({ currentUser, logout }) => {
             <NavLink>
                 <img className='logo' src={logo} />
             </NavLink>
+            <NavLink to='/login'>
+                Login
+            </NavLink>
+            <NavLink to='/Decks'>
+                Decks
+            </NavLink>
+            <NavLink>
+
+            </NavLink>
         </div>
     )
 }
